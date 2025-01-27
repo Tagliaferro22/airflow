@@ -1,0 +1,1 @@
+¡Hola! En este repositorio voy a ir subiendo lo que aprenda de Airlow, incorporaré el aprendizaje mediante mini-proyectos, que eventualmente me permitirían construir un proyecto más complejo.
