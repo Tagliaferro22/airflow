@@ -1,5 +1,3 @@
-# https://api.openweathermap.org/data/3.0/onecall?lat=-34.8806944444&lon=-57.9958055556&appid=a0e5483662a5faed42697e1d9119b3a1
-
 from __future__ import annotations
 
 import json
@@ -19,4 +17,14 @@ api_dag = DAG(
     default_args = {"retries" : 1},
     start_date = datetime(2025,1,31),
     catchup = False
+)
+
+# Esta es la tarea necesaria para obtener la información del HTTP, es decir, de nuestra API
+get_data_from_api = SimpleHttpOperator(
+    task_id="get_http_data",
+    http_conn_id="http_conn_id_demo",
+    method="GET",
+    endpoint=f"https://api.openweathermap.org/data/3.0/onecall?lat=-34.8806944444&lon=-57.9958055556&appid={}",
+    response_filter = lambda response : json.loads(response.text),
+    dag=dag
 )
